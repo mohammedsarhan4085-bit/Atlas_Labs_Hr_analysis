@@ -43,6 +43,31 @@ This section allows for an in-depth view of an individual employee's history (e.
 * **Work-Life Balance:** Tracks the yearly score for the **Work-Life Balance** metric.
 
 ---
+## 🏗️ Data Model (Snowflake Schema)
+
+The dashboard is built upon a **Snowflake Schema** data model, designed for optimal analysis of employee performance and demographics. This structure helps separate descriptive attributes from factual, measured events, ensuring efficiency and clarity in the data structure.
+
+### Model Components:
+
+#### 1. Fact Table
+* **FactPerformanceRating:** The central table containing key metrics and foreign keys. It records performance events and satisfaction scores, including **Job Satisfaction**, **Environment Satisfaction**, **Manager Rating**, **Self Rating**, and **Training Opportunities Taken**.
+
+#### 2. Dimension Tables
+* **DimEmployee:** Contains static employee attributes like **Age**, **Gender**, **Attrition**, **Department**, and **Education Field**.
+* **DimDate:** A standard date dimension used for filtering and time-based analysis (e.g., **ReviewDate**).
+* **DimEducationLevel:** A snowflaked dimension that provides the specific **Education** details linked by **EducationLevelID**.
+* **DimRatingID:** A snowflaked dimension defining the specific **RatingLevel** (e.g., Unacceptable, Meets Expectation).
+* **DimSatisfactionLevel:** A snowflaked dimension defining the specific **Satisfaction Level** (e.g., Very Dissatisfied, Satisfied).
+
+#### 3. Measures Table
+* **_measures:** A virtual table (or measure group) containing calculated KPIs such as **total employees**, **active employee**, **attrition rate %**, **AttritionDateRate %**, and **AverageSalary**.
+
+### Schema Visualisation
+For a visual representation of the relationships between these tables:
+
+![Snowflake Data Model Schema for HR Analytics](snowflake_schema.PNG)
+
+---
 
 ## 🛠️ Technology Stack
 The dashboards were created using a modern Business Intelligence tool.
